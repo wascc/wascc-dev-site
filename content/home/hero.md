@@ -48,7 +48,7 @@ hero_media = "icon-512.png"
   label = '<a class="js-github-release" href="https://github.com/wascc/wascc-host/releases" data-repo="wascc/wascc-host">Latest release<!-- V --></a>'
 +++
 
-**A dynamic, elastically scalable WebAssembly Host Runtime for securely granting access to capabilities**
+**A dynamic, elastically scalable WebAssembly host runtime for securely connecting actors and capability providers**
 
 Build your _functions_ and _services_ in WebAssembly and deploy and run them _anywhere_.
 

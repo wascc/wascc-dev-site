@@ -1,0 +1,79 @@
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
+[[main]]
+  pre = "<i class=\"fas fa-images pr-1\" ></i>"
+  name = "Showcase"
+  url = "#hero"
+  weight = 10
+
+[[main]]
+  pre = "<i class=\"fas fa-book pr-1\" ></i>"
+  name = "Docs"
+  url = "docs/"
+  weight = 15
+
+[[main]]
+  name = "Posts"
+  url = "#posts"
+  weight = 20
+
+[[main]]
+  name = "Projects"
+  url = "#projects"
+  weight = 30
+
+[[main]]
+  name = "Tutorials"
+  url = "tutorials/"
+  weight = 50
+
+
+#[[main]]
+#  name = "Contact"
+#  url = "#contact"
+#  weight = 60
+
+
+[[main_right]]
+  name = "<i class=\"fab fa-github-alt\" style=\"color: #333; font-size: 1rem; line-height: 1.25\"></i>"
+  post = ""
+  url = "https://github.com/waxosuit/waxosuit"
+  weight = 10
+
+[[main_right]]
+  name = "<i class=\"fab fa-twitter\" style=\"color: #55acee; font-size: 1rem; line-height: 1.25\"></i>"
+  post = ""
+  url = "https://twitter.com/wasca_runtime"
+  weight = 20
+
+
+# Link to a PDF of your resume/CV from the menu.
+# To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
+# [[main]]
+#    name = "CV"
+#    url = "files/cv.pdf"
+#    weight = 70
+
+[[docs]]
+  name = "Overview"
+  weight = 10
+  url = "/docs/"
+
+[[docs]]
+  name = "Getting Started"
+  weight = 20
+  identifier = "setup"
+
+[[docs]]
+  name = "Concepts"
+  weight = 30
+  identifier = "concepts"
+
+[[docs]]
+  name = "Architecture"
+  weight = 40
+  identifier = "arch"
+

@@ -52,4 +52,4 @@ hero_media = "icon-512.png"
 
 Build your _functions_ and _services_ in WebAssembly and deploy and run them _anywhere_.
 
-<span style="text-shadow: none;"><a class="github-button" href="https://github.com/wascc/wascc-dev" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star this on GitHub">Star</a><script async defer src="https://buttons.github.io/buttons.js"></script></span>
+<span style="text-shadow: none;"><a class="github-button" href="https://github.com/wascc/wascc-host" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star this on GitHub">Star</a><script async defer src="https://buttons.github.io/buttons.js"></script></span>

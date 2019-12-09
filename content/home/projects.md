@@ -28,6 +28,10 @@ subtitle = ""
   [[content.filter_button]]
     name = "Space"
     tag = "space"
+
+[[content.filter_button]]
+    name = "Gaming"
+    tag = "gaming"    
   
 #  [[content.filter_button]]
 #    name = "Other"

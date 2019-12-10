@@ -77,3 +77,9 @@
   weight = 40
   identifier = "arch"
 
+[[docs]]
+  name = "Security"
+  weight = 50
+  identifier = "security"
+
+

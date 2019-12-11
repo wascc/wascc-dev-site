@@ -4,7 +4,7 @@
 title: "WebAssembly Host Runtimes - More than just a J2EE Evolution"
 subtitle: "Are we repeating the mistakes of the past?"
 summary: "The comparison between wasm host runtimes and J2EE is inevitable. Is this just a new face on an old technology?"
-authors: []
+authors: ["kevin"]
 tags: []
 categories: []
 date: 2019-12-11T08:05:06-05:00
@@ -27,7 +27,7 @@ image:
 #   Otherwise, set `projects = []`.
 projects: []
 ---
-Collectively, our industry has a long and difficult history of re-inventing things as something that may still not solve the original problem. Those who adhere to the _not invented here_ (NIH) philosophy are constantly re-building things as their own. All too often, we end up re-inventing the wheel as a square simply so that we can claim that this new thing is _our wheel_.
+Collectively, our industry has a long and difficult history of re-inventing things as something that may still not solve the original problem. Those who adhere to the _not invented here_ (NIH) philosophy are constantly re-building things as their own. All too often, we end up re-inventing the wheel as a square simply so that we can claim this new thing as _our wheel_.
 
 Are we doing that with WebAssembly outside the browser? If you take only a cursory glance at some of the features of wasm host runtimes in the cloud, it might indeed seem like we're just re-inventing [J2EE](https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition).
 

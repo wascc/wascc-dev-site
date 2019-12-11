@@ -71,7 +71,7 @@ J2EE was massive. The installation footprint of reference runtimes could be enor
 
 Are out-of-browser WebAssembly host runtimes just another J2EE? **No**. However, J2EE and runtimes like waSCC endeavor to solve the same kinds of problems. We need a way to  reduce boilerplate, speed time to production, remove friction from every step of the development process, and we need to be able to build applications that can run anywhere we deploy them, regardless of the host characteristics.
 
-Most of us hated the world of J2EE. It was a high-friction development process with an error-prone, brittle deployment process and an aged configuration mechanism steeped in the world of pets for computing instead of cattle. That said, Fortune 500 companies relied on J2EE runtimes as the bedrock of their server-side operations and did so for years. For all its faults, J2EE solved real problems.
+Developing with J2EE was a high-friction activity with an error-prone, brittle deployment process and an aged configuration mechanism steeped in the world of [pets](http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/) for computing instead of cattle. That said, Fortune 500 companies relied on J2EE runtimes as the bedrock of their server-side operations and did so for years. For all its faults, J2EE solved real problems.
 
 So perhaps WebAssembly host runtimes that deliver enterprise capabilities are just an evolution of J2EE--but I think we've learned from our mistakes, and if we do this right, we can build the cloud native version of what J2EE _should have been_. With WebAssembly the workloads are smaller, faster, arguably more portable, easier to deploy, more secure, and benefit from a stronger sandbox.
 

@@ -25,12 +25,17 @@ $ cargo new hellorunner --bin
 ```
 
 ## Use the waSCC Library
-To use the waSCC library, first we'll need to add a dependency to our `Cargo.toml` file:
+To build our demo, we'll need to add a few dependencies to our `Cargo.toml` file:
 
 ```
 [dependencies]
+env_logger = "0.7.1"
 wascc-host = "(wascc version number)"
 ```
+
+The first (`env_logger`) is not a requirement of waSCC, but we use it to print log info to output.
+
+The second, `wascc-host`, is the main waSCC library for building hosts. Get the latest verson from [crates.io](https://crates.io/crates/wascc-host).
 
 ## Write Host Setup Code
 The next step is to write our `main()` function. In this function we will initialize the host runtime with our actor module and a capability provider. Change your `main.rs` to the following:

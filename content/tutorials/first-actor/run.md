@@ -76,7 +76,7 @@ An error like this means that you forgot to sign your actor's module, or that yo
 Error: Error(Authorization("No embedded JWT in actor module"))
 ```
 
-This error indicates that the module key used in `host::configure()` is not correct:
+This error indicates that list of claims in the signed module you're using doesn't include `wascc:http_server`:
 
 ```
 Error: Error(Authorization("Actor MCYQSR5WIOABHZP6Z3SG67REVC2QDCYAHUVXHUSSLFWNO55OZ3O33MKR is not authorized to use capability wascc:http_server, configuration rejected"))

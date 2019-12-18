@@ -59,7 +59,7 @@ Remember that the seed is private, treat it as a secret.
 ```
 Your output will vary since each key is unique.
 
-Latter on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
+Later on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
 
 Copy the `seed` value (note the `SA` prefix) and store it in a file account `account.nk` as we'll need to use this file later when we sign modules. 
 
@@ -76,7 +76,7 @@ Seed: SMAI2EIJNR3ODSRTGXXBKZWRRU6HHT3CETVBZ246AVWJYZ6GSUIR43A4UE
 Remember that the seed is private, treat it as a secret.
 ```
 
-Latter on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
+Later on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
 
 Copy the `seed` value (note the `SM` prefix) into a file called `module.nk`. This will also be required for signing the module.
 

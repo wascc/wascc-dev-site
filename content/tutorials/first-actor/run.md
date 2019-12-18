@@ -62,5 +62,25 @@ You should see output that looks similar to the following in your service's term
 [2019-12-10T15:38:43Z INFO  actix_web::middleware::logger] 127.0.0.1:33558 "GET / HTTP/1.1" 200 26 "-" "curl/7.65.3" 0.001570
 ```
 
+### Troubleshooting
+
+Errors like this mean that one or more of your actor or module file paths are incorrect:
+
+```
+Error: Error(IO(Os { code: 2, kind: NotFound, message: "No such file or directory" }))
+```
+
+An error like this means that you forgot to sign your actor's module, or that you are pointing to `hello.wasm` instead of `hello_signed.wasm`:
+
+```
+Error: Error(Authorization("No embedded JWT in actor module"))
+```
+
+This error indicates that the module key used in `host::configure()` is not correct:
+
+```
+Error: Error(Authorization("Actor MCYQSR5WIOABHZP6Z3SG67REVC2QDCYAHUVXHUSSLFWNO55OZ3O33MKR is not authorized to use capability wascc:http_server, configuration rejected"))
+```
+
 ## Congratulations
 You have built your first service using **waSCC**. Now it's time to explore the library some more and, more importantly, explore the possibilities of building secure services in the cloud, at the edge, or anywhere else with WebAssembly.

@@ -71,15 +71,42 @@ The first important line of code is:
 host::add_actor(Actor::from_file("../hellohttp/hello_signed.wasm")?)?;
 ```
 
-This will add a new actor module to the runtime host. A thread for handling this actor's messages will be immediately provisioned. Next, we add a native (linux shared object file) capability provider plugin:
+This will add a new actor module to the runtime host. A thread for handling this actor's messages will be immediately provisioned.
+
+Next, we add a native capability provider plugin that will provide an implementation of the HTTP server. A pre-built Linux `.so` version is available [here](https://github.com/wascc/wascc-host/tree/master/examples/.assets). To run this on macOS, you will need to build `libwascc_httpsrv` as a `dylib` and point the path above to the `libwascc_httpsrv.dylib`. The fastest way to do this is to clone [this project](https://github.com/wascc/http-server-provider) on a Mac, and then do a `cargo build`. The dynamic library will be built automatically.
 
 ```rust
+// Linux version:
 host::add_native_capability(Capability::from_file(
-        "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
-    )?)?;
+    "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
+)?)?;
+
+// macOS version (you need to build the dylib yourself):
+host::add_native_capability(Capability::from_file(
+    "path/to/libwascc_httpsrv.dylib",
+)?)?;
 ```
 
-Remember that both actors _and_ capability providers are _reactive_. This means that the capability provider won't do anything on behalf of an actor until it has been configured. So we send a `HashMap<String, String>` of configuration data to a particular capability ID (`wascc:http_server`) for a given actor's public key (the `MCY...` string).
+In waSCC, both actors _and_ capability providers are _reactive_. This means that the capability provider won't do anything on behalf of an actor until it has been configured. So we send a `HashMap<String, String>` of configuration data to a particular capability ID (`wascc:http_server`) for a given actor's public key (the `MCY...` string). In this case, we tell the host that our actor's HTTP capability (`wascc:http`) should be configured to answer requests on port `8081`.
+
+In the [Sign Module](sign_module.md) section, we generated a _module key_, and the output looked something like this:
+
+```
+Public Key: Mxxxxxxxxxxxxxxx
+Seed: Sxxxxxxxxxx
+
+Remember that the seed is private, treat it as a secret.
+```
+
+The _Public Key_ value is used to identify and validate the actor module. So copy the Public Key into the call to `host::configure`:
+
+```rust
+host::configure(
+    "Mxxxxxxxxxxxxxxx",  // <-- Your actor's "module" public key goes here
+    "wascc:http_server",
+    generate_port_config(8081),
+)?;
+```
 
 Once we've called `host::configure`, the HTTP server capability has spun up a new thread and has created a new server dedicated specifically to our actor module on the port number specified.
 

@@ -57,7 +57,11 @@ Seed: SAAKPT6OUB3DUPKHGR4BXTTG6SZE5DEXIJ2LBOIF3CTLMOQ5F6FL2FH3NU
 
 Remember that the seed is private, treat it as a secret.
 ```
-Your output will vary since each key is unique. Copy the `seed` value (note the `SA` prefix) and store it in a file account `account.nk` as we'll need to use this file later. 
+Your output will vary since each key is unique.
+
+Latter on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
+
+Copy the `seed` value (note the `SA` prefix) and store it in a file account `account.nk` as we'll need to use this file later when we sign modules. 
 
 ## Create a Module Key
 An [actor module](/docs/security/modules/) is an entity of execution. It inherits its trust from the trust of of the _issuer_ (the account). Every actor we create gets a public key derived from its seed key.
@@ -71,6 +75,9 @@ Seed: SMAI2EIJNR3ODSRTGXXBKZWRRU6HHT3CETVBZ246AVWJYZ6GSUIR43A4UE
 
 Remember that the seed is private, treat it as a secret.
 ```
+
+Latter on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.
+
 Copy the `seed` value (note the `SM` prefix) into a file called `module.nk`. This will also be required for signing the module.
 
 ## Install the Wascap Tool

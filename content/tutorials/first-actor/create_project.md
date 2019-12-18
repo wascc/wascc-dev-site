@@ -92,4 +92,8 @@ fn hello_world(_ctx: &CapabilitiesContext,
 
 When we run this in the host runtime, it will return this JSON payload in response to every HTTP request received. It's worth noting here that there's no code inside the actor that cares _how_ we're hosting HTTP, nor is there any code that is tightly coupled to a specific HTTP server implementation.
 
-In the next step, you'll see how to compile and sign your actor module to prep it for running inside a **waSCC** host.
+## Compiling
+
+At this point we can compile the code with `cargo build`. This will build the WASM binary and place it in `target/wasm32-unknown-unknown/debug`.
+
+In the next step, we'll cover how to sign an actor module, preparing it to run inside a **waSCC** host.

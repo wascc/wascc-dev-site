@@ -42,12 +42,12 @@ The next step is to write our `main()` function. In this function we will initia
 
 ```rust
 use std::collections::HashMap;
-use wascc_host::{host, Actor, Capability};
+use wascc_host::{host, Actor, NativeCapability};
 
 fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
     host::add_actor(Actor::from_file("../hellohttp/hello_signed.wasm")?)?;
-    host::add_native_capability(Capability::from_file(
+    host::add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
     )?)?;
 
@@ -82,12 +82,12 @@ Next, we add a native capability provider plugin that will provide an implementa
 
 ```rust
 // Linux version:
-host::add_native_capability(Capability::from_file(
+host::add_native_capability(NativeCapability::from_file(
     "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
 )?)?;
 
 // macOS version (you need to build the dylib yourself):
-host::add_native_capability(Capability::from_file(
+host::add_native_capability(NativeCapability::from_file(
     "path/to/libwascc_httpsrv.dylib",
 )?)?;
 ```

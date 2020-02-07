@@ -49,6 +49,7 @@ pub fn receive(ctx: &CapabilitiesContext, operation: &str, msg: &[u8]) -> CallRe
     match operation {
         http::OP_HANDLE_REQUEST => hello_world(ctx, msg),
         core::OP_HEALTH_REQUEST => Ok(vec![]),
+        core::OP_REMOVE_ACTOR => Ok(vec![]),
         _ => Err("Unknown operation".into()),
     }
 }

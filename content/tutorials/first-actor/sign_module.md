@@ -46,6 +46,7 @@ SUBCOMMANDS:
 ```
 
 ## Create an Account Key
+
 An [account](/docs/security/accounts/) is an entity that issues a signed JWT (Json Web Token) which is then embedded in the module. In short, the account is a unit of trust. If you trust the account, then, assuming the signature is valid, you trust the module issued by that account.
 
 To create a new account key, enter the following command:
@@ -64,6 +65,7 @@ Later on, you will need both the public key and the seed. Copy the public key to
 Copy the `seed` value (note the `SA` prefix) and store it in a file account `account.nk` as we'll need to use this file later when we sign modules. 
 
 ## Create a Module Key
+
 An [actor module](/docs/security/modules/) is an entity of execution. It inherits its trust from the trust of of the _issuer_ (the account). Every actor we create gets a public key derived from its seed key.
 
 To create a module key, enter the following command:
@@ -81,7 +83,8 @@ Later on, you will need both the public key and the seed. Copy the public key to
 Copy the `seed` value (note the `SM` prefix) into a file called `module.nk`. This will also be required for signing the module.
 
 ## Install the Wascap Tool
-The [wascap](https://github.com/wascc/wascap) library (and its accompanying CLI) is used for embedding, extracting, and validating the signatures and capability attestations in actor modules. You'll need this installed before you can sign modules.
+
+The [wascap](https://github.com/wascc/wascap) library (and its accompanying CLI) is used for embedding, extracting, and validating the signatures and capability attestations in actor modules. You'll need this installed before you can sign modules. If you already have `wascap` installed, you might install it with `--force` to ensure you've got the latest version.
 
 As with the other tooling, you can install `wascap` via `cargo install`:
 
@@ -90,22 +93,24 @@ $ cargo install wascap --features "cli"
 ```
 
 ## Sign your Module
+
 Signing your module is just a matter of running `wascap` with the keys you generated earlier and specifying which capabilities this actor is allowed to use. In our case, the only capability the actor needs is the HTTP server (indicated with the `-s` flag):
 
 ```shell
-$ wascap sign -s -a ./account.nk -m ./module.nk target/wasm32-unknown-unknown/debug/hellohttp.wasm hello_signed.wasm
+$ wascap sign target/wasm32-unknown-unknown/debug/hellohttp.wasm hello_signed.wasm -u ./module.nk -i ./account.nk -n "Hello World" -s
 Successfully signed hello_signed.wasm.
 ```
 
 This will have produced a new file called `hello_signed.wasm`.
 
 ## Examine Module Signature
+
 Before we continue on to the next step, let's take a look at what our signature looks like on the actor module:
 
 ```shell
 $ wascap caps ./hello_signed.wasm 
 ╔════════════════════════════════════════════════════════════════════════════╗
-║                          Secure WebAssembly Module                         ║
+║                          Hello World - Module                              ║
 ╠═══════════════╦════════════════════════════════════════════════════════════╣
 ║ Account       ║   ABANVDKJYPTJZQTECHRJTTZONTJUWVPEG22T6DKLASAFYZ2DRGPQGJBV ║
 ╠═══════════════╬════════════════════════════════════════════════════════════╣

@@ -94,6 +94,12 @@ When we run this in the host runtime, it will return this JSON payload in respon
 
 ## Compiling
 
+If you don't already have the `wasm32-unknown-unknown` Rust cross-compilation target installed, you can install it with the following command:
+
+```terminal
+$ rustup target add wasm32-unknown-unknown
+```
+
 At this point we can compile the code with `cargo build`. This will build the WASM binary and place it in `target/wasm32-unknown-unknown/debug`.
 
 In the next step, we'll cover how to sign an actor module, preparing it to run inside a **waSCC** host.

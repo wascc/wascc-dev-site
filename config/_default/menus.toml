@@ -30,6 +30,10 @@
   url = "tutorials/"
   weight = 50
 
+[[main]]
+  name = "Talks"
+  url = "talk/"
+  weight = 60
 
 #[[main]]
 #  name = "Contact"

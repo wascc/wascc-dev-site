@@ -1,6 +1,6 @@
 ---
 title: Creating an Actor Project in Rust
-linktitle: Create Actor Project
+linktitle: Create an Actor Project
 toc: true
 type: docs
 date: "2019-12-09T00:00:00Z"
@@ -16,6 +16,7 @@ weight: 2
 During this part of the tutorial, you will create a new empty _actor module_ WebAssembly project and add code to handle incoming HTTP requests.
 
 ## Cargo Generate New Project
+
 While you can create your own Rust project from scratch, it's far easier to use the pre-supplied starter template. Using `cargo generate`, you can create a new project that is already configured to build an _actor module_.
 
 If you don't already have `cargo generate` installed, you can install it with the following command:
@@ -43,28 +44,31 @@ extern crate wascc_actor as actor;
 
 use actor::prelude::*;
 
-actor_receive!(receive);
-
-pub fn receive(ctx: &CapabilitiesContext, operation: &str, msg: &[u8]) -> CallResult {    
-    match operation {
-        http::OP_HANDLE_REQUEST => hello_world(ctx, msg),
-        core::OP_HEALTH_REQUEST => Ok(vec![]),
-        _ => Err("Unknown operation".into()),
-    }
-}
+actor_handlers! { http::OP_HANDLE_REQUEST => hello_world, 
+                  core::OP_HEALTH_REQUEST => health }
 
 fn hello_world(
    _ctx: &CapabilitiesContext,
-   _payload: impl Into<http::Request>) -> CallResult {
-    Ok(protobytes(http::Response::ok())?)
+   _payload: http::Request) -> ReceiveResult {
+    Ok(serialize(http::Response::ok())?)
+}
+
+fn health(
+    _ctx: &CapabilitiesContext,
+    _req: core::HealthRequest
+) -> ReceiveResult {
+    Ok(vec![])
 }
 ```
 
 There are only a couple of things you need to do as an actor developer to build fully functioning services. 
 
-First, you'll need to invoke the `actor_receive!` macro, which tells the actor SDK which function you're going to use to handle messages coming from the host runtime. The `http::OP_HANDLE_REQUEST` and `core::OP_HEALTH_REQUEST` are constants defined by the actor SDK. As you get into more advanced tutorials, we'll walk through some patterns to define your own operation constants.
+First, you'll need to invoke the `actor_handlers!` macro, which tells the actor SDK which _operations_ you are going to handle, and which functions will be called in response. The SDK automatically converts the messages into the appropriate data types for you.
+
+`http::OP_HANDLE_REQUEST` and `core::OP_HEALTH_REQUEST` are constants defined by the actor SDK. As you get into more advanced tutorials, we'll walk through some patterns to define your own operation constants.
 
 ## Handle HTTP Requests
+
 If you were to run this module inside the **waSCC** host runtime right now, it would simply return a `200 OK` response with no payload. Let's make a few changes to this module to make it do something a little more interesting.
 
 We're going to return a simple JSON payload to the callers, so the first thing we want to do is add the `serde_json` crate to our dependencies. Add the following line (version number may be outdated) to your `Cargo.toml` file in the dependencies section:
@@ -84,7 +88,7 @@ Now let's replace the `hello_world` function with the following code:
 
 ```rust
 fn hello_world(_ctx: &CapabilitiesContext, 
-                 _payload: impl Into<http::Request>) -> CallResult {
+               _payload: http::Request) -> CallResult {
     let result = json!({ "hello": "world", "data": 21});
     Ok(protobytes(http::Response::json(result, 200, "OK"))?)
 }

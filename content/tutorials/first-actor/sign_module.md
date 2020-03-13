@@ -1,6 +1,6 @@
 ---
 title: Sign the Actor Module
-linktitle: Sign Module
+linktitle: Sign the Module
 toc: true
 type: docs
 date: "2019-12-09T00:00:00Z"
@@ -19,6 +19,7 @@ In this step, we'll go through the process of signing an actor module. Signing m
 Signing an actor module involves creating an _account key_ and a _module key_, and then signing the actor with those keys and a list of capabilities that actor will use.
 
 ## Install the Nkeys Tool
+
 In order to generate your account and module keys, you'll need the [nkeys](https://github.com/encabulators/nkeys) tool installed. You can download the source and compile the binary yourself, or you can install the CLI with cargo:
 
 ```shell
@@ -58,6 +59,7 @@ Seed: SAAKPT6OUB3DUPKHGR4BXTTG6SZE5DEXIJ2LBOIF3CTLMOQ5F6FL2FH3NU
 
 Remember that the seed is private, treat it as a secret.
 ```
+
 Your output will vary since each key is unique.
 
 Later on, you will need both the public key and the seed. Copy the public key to a location that you can reference later.

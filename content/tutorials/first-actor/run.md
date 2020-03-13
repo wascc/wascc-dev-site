@@ -36,6 +36,7 @@ $ RUST_LOG=info cargo run
 [2019-12-10T15:35:13Z INFO  actix_server::builder] Starting 8 workers
 [2019-12-10T15:35:13Z INFO  actix_server::builder] Starting server on 0.0.0.0:8081
 ```
+
 Depending on the version of `wascc-host` you're using, your output may differ a little bit, but the basic idea should remain the same. We can see that we're adding our `MCYQS...` actor to the host runtime, and we're adding a native capability provider for the `wascc:http_server` capability. 
 
 Next, you can see the call to `Configure` being managed by the host runtime, setting up the instance of an HTTP server for our actor. Immediately after that, you can see the HTTP server (in our case, _Actix Web_) bring up a new instance.
@@ -56,6 +57,7 @@ $ curl localhost:8081 | jq
 The `jq` command just gives us some nice printing (as well as powerful querying) JSON capabilities. 
 
 You should see output that looks similar to the following in your service's terminal window:
+
 ```shell
 [2019-12-10T15:38:43Z INFO  wascc_host::host] Capability wascc:http_server received invocation for target MCYQSR5WIOABHZP6Z3SG67REVC2QDCYAHUVXHUSSLFWNO55OZ3O33MKR
 [2019-12-10T15:38:43Z INFO  wapc] Wasm Guest: Performing guest call, operation - HandleRequest
@@ -64,7 +66,7 @@ You should see output that looks similar to the following in your service's term
 
 ### Troubleshooting
 
-Errors like this mean that one or more of your actor or module file paths are incorrect:
+Errors like this mean that one or more of your actor or module file paths are incorrect and the host can't find them:
 
 ```
 Error: Error(IO(Os { code: 2, kind: NotFound, message: "No such file or directory" }))
@@ -82,5 +84,6 @@ This error indicates that list of claims in the signed module you're using doesn
 Error: Error(Authorization("Actor MCYQSR5WIOABHZP6Z3SG67REVC2QDCYAHUVXHUSSLFWNO55OZ3O33MKR is not authorized to use capability wascc:http_server, configuration rejected"))
 ```
 
-## Congratulations
-You have built your first service using **waSCC**. Now it's time to explore the library some more and, more importantly, explore the possibilities of building secure services in the cloud, at the edge, or anywhere else with WebAssembly.
+## Congratulations!
+
+You have built your first actor and service using **waSCC**. Now it's time to explore the library some more and, more importantly, explore the possibilities of building secure services in the cloud, at the edge, or anywhere else with WebAssembly.

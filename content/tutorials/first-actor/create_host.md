@@ -1,6 +1,6 @@
 ---
 title: Create a Runtime Host
-linktitle: Create Host
+linktitle: Create a Host
 toc: true
 type: docs
 date: "2019-12-09T00:00:00Z"

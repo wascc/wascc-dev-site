@@ -122,7 +122,7 @@ fn handle_call(&self, actor: &str, op: &str, msg: &[u8]) -> Result<Vec<u8>, Box<
     trace!("Received host call from {}, operation - {}", actor, op);
 
     match op {
-        OP_CONFIGURE if actor == "system" => self.configure(msg.to_vec().as_ref()),
+        OP_BIND_ACTOR if actor == "system" => self.configure(msg.to_vec().as_ref()),
         OP_REMOVE_ACTOR if actor == "system" => {
             self.remove_actor(CapabilityConfiguration::decode(msg).unwrap())
         }
@@ -151,7 +151,7 @@ fn handle_call(&self, actor: &str, op: &str, msg: &[u8]) -> Result<Vec<u8>, Box<
 }
 ```
 
-The starter template gave us an empty implementation for handling the `OP_CONFIGURE` operation, but the rest of these we'll have to add implementations for. Let's take a look at the code for handling `OP_SET` and `OP_GET`, which are just thin wrappers around the functionality in the `kv` module (in `src/lib.rs`):
+The starter template gave us an empty implementation for handling the `OP_BIND_ACTOR` operation, but the rest of these we'll have to add implementations for. Let's take a look at the code for handling `OP_SET` and `OP_GET`, which are just thin wrappers around the functionality in the `kv` module (in `src/lib.rs`):
 
 ```rust
 impl KeyvalueProvider {

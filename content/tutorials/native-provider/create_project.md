@@ -44,7 +44,7 @@ extern crate wascc_codec as codec;
 extern crate log;
 
 use codec::capabilities::{CapabilityProvider, Dispatcher, NullDispatcher};
-use codec::core::{OP_CONFIGURE, OP_REMOVE_ACTOR};
+use codec::core::{OP_BIND_ACTOR, OP_REMOVE_ACTOR};
 use wascc_codec::core::CapabilityConfiguration;
 
 use std::error::Error;
@@ -108,7 +108,7 @@ impl CapabilityProvider for KeyvalueProvider {
         trace!("Received host call from {}, operation - {}", actor, op);
 
         match op {
-            OP_CONFIGURE if actor == "system" => self.configure(msg.to_vec().as_ref()),
+            OP_BIND_ACTOR if actor == "system" => self.configure(msg.to_vec().as_ref()),
             OP_REMOVE_ACTOR => Ok(vec![]), // Notifies provider when actor is removed from host
             _ => Err("bad dispatch".into()),
         }

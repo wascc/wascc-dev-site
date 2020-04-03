@@ -21,13 +21,13 @@ While you can create your own Rust project from scratch, it's far easier to use 
 
 If you don't already have `cargo generate` installed, you can install it with the following command:
 
-```terminal
+```shell
 $ cargo install cargo-generate
 ```
 
 Once you've got `cargo generate` installed, run it with the following command to create the new project:
 
-```terminal
+```shell
 $ cargo generate --git https://github.com/wascc/new-actor-template
  Project Name: hellohttp
  Creating project called `hellohttp`...
@@ -37,6 +37,7 @@ $ cargo generate --git https://github.com/wascc/new-actor-template
 You can choose whatever project name you like, but for this example we used `hellohttp`.
 
 ## Examine the Starter Code
+
 Once you've created your new project, you will have the following code in your `src/lib.rs` file:
 
 ```rust
@@ -44,28 +45,23 @@ extern crate wascc_actor as actor;
 
 use actor::prelude::*;
 
-actor_handlers! { http::OP_HANDLE_REQUEST => hello_world, 
-                  core::OP_HEALTH_REQUEST => health }
+actor_handlers! { codec::http::OP_HANDLE_REQUEST => hello_world,
+                  codec::core::OP_HEALTH_REQUEST => health }
 
-fn hello_world(
-   _ctx: &CapabilitiesContext,
-   _payload: http::Request) -> ReceiveResult {
-    Ok(serialize(http::Response::ok())?)
+fn hello_world(_payload: codec::core::http::Request) -> ReceiveResult {
+    Ok(serialize(codec::http::Response::ok())?)
 }
 
-fn health(
-    _ctx: &CapabilitiesContext,
-    _req: core::HealthRequest
-) -> ReceiveResult {
+fn health(_req: core::HealthRequest) -> ReceiveResult {
     Ok(vec![])
 }
 ```
 
 There are only a couple of things you need to do as an actor developer to build fully functioning services. 
 
-First, you'll need to invoke the `actor_handlers!` macro, which tells the actor SDK which _operations_ you are going to handle, and which functions will be called in response. The SDK automatically converts the messages into the appropriate data types for you.
+First, you'll need to invoke the `actor_handlers!` macro, which tells the actor API which _operations_ you are going to handle, and which functions will be called in response. The API automatically converts the messages into the appropriate data types for you.
 
-`http::OP_HANDLE_REQUEST` and `core::OP_HEALTH_REQUEST` are constants defined by the actor SDK. As you get into more advanced tutorials, we'll walk through some patterns to define your own operation constants.
+`codec::http::OP_HANDLE_REQUEST` and `codec::core::OP_HEALTH_REQUEST` are constants defined by the actor SDK. As you get into more advanced tutorials, we'll walk through some patterns to define your own operation constants.
 
 ## Handle HTTP Requests
 
@@ -74,7 +70,7 @@ If you were to run this module inside the **waSCC** host runtime right now, it w
 We're going to return a simple JSON payload to the callers, so the first thing we want to do is add the `serde_json` crate to our dependencies. Add the following line (version number may be outdated) to your `Cargo.toml` file in the dependencies section:
 
 ```
-serde_json = "1.0.44"
+serde_json = "1.0.50"
 ```
 
 Next, add the following to the top of your `src/lib.rs` file to let us use the `json!` macro:
@@ -87,10 +83,9 @@ extern crate serde_json;
 Now let's replace the `hello_world` function with the following code:
 
 ```rust
-fn hello_world(_ctx: &CapabilitiesContext, 
-               _payload: http::Request) -> CallResult {
+fn hello_world(_payload: codec::http::Request) -> CallResult {
     let result = json!({ "hello": "world", "data": 21});
-    Ok(protobytes(http::Response::json(result, 200, "OK"))?)
+    Ok(serialize(codec::http::Response::json(result, 200, "OK"))?)
 }
 ```
 
@@ -100,7 +95,7 @@ When we run this in the host runtime, it will return this JSON payload in respon
 
 If you don't already have the `wasm32-unknown-unknown` Rust cross-compilation target installed, you can install it with the following command:
 
-```terminal
+```shell
 $ rustup target add wasm32-unknown-unknown
 ```
 

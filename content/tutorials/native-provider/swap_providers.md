@@ -22,33 +22,38 @@ Take a look at the new `src/main.rs` of our example:
 
 ```rust
 use std::collections::HashMap;
-use wascc_host::{host, Actor, NativeCapability};
+use wascc_host::{WasccHost, Actor, NativeCapability};
 
 fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
-    host::add_actor(
+    let host = WasccHost::new();
+    host.add_actor(
         Actor::from_file("../../wascc/wascc-host/examples/.assets/kvcounter.wasm")?)?;
 
 
-    host::add_native_capability(NativeCapability::from_file(
+    host.add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
+        None,
     )?)?;
 
     //host::add_native_capability(NativeCapability::from_file(
     //    "../../wascc/wascc-host/examples/.assets/libkeyvalue.so",
     //)?)?;
-    host::add_native_capability(NativeCapability::from_file(
+    host.add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libredis_provider.so",
+        None,
     )?)?;
 
-    host::configure(
+    host.bind_actor(
         "MASCXFM4R6X63UD5MSCDZYCJNPBVSIU6RKMXUPXRKAOSBQ6UY3VT3NPZ",
         "wascc:http_server",
+        None,
         generate_port_config(8081),
     )?;
-    host::configure(
+    host.bind_actor(
         "MASCXFM4R6X63UD5MSCDZYCJNPBVSIU6RKMXUPXRKAOSBQ6UY3VT3NPZ",
         "wascc:keyvalue",
+        None
         redis_config(),
     )?;
 

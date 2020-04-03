@@ -26,13 +26,13 @@ Native capabilities have no restrictions on what they can and cannot do. They ha
 
 This is important, because it means that native capability providers can be multi-threaded and communicate with other services across the network. Given the current state of the WebAssembly community and the **WASI** standard, the vast majority of capability providers you encounter will be native providers.
 
-As with all other capabilities, communication with actors is done through simple messaging. Messages are made up of an _operation_ and a _payload_. The operation is a string typically formatted like so: `namespace:capability_id!OperationName`.
+As with all other capabilities, communication with actors is done through simple messaging. Messages are made up of a _binding_, an _operation_ and a _payload_.
 
 Communication can be bi-directional--an actor may send messages to or make requests of a capability provider, and a capability can deliver messages to an actor.
 
 ## Portable Capabilities
 
-A _portable capability_ is actually just an actor that has been given slightly more privilege within the waSCC host runtime. Rather than being loaded as a pure, isolated WebAssembly module, portable capability providers are loaded as **[WASI](https://wasi.dev)** modules. This means they can make POSIX-like, low-level system calls but cannot do things like create new threads or otherwise exceed the boundaries of the WebAssembly specification.
+A _portable capability_ is actually just an actor that has been given slightly more privilege within the waSCC host runtime. Rather than being loaded as a pure, isolated WebAssembly module (the `wasm32-unknown-unknown` target in Rust), portable capability providers are loaded as **[WASI](https://wasi.dev)** modules. This means they can make POSIX-like, low-level system calls but cannot do things like create new threads or otherwise exceed the boundaries of the WebAssembly specification.
 
 Today, the number of realistic use cases for a portable capability is low due to the limitations of the WASI specification. However, as WASI gains stable networking constraints, then portable capability providers will automatically be able to benefit from those advances.
 

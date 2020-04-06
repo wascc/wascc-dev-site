@@ -68,6 +68,12 @@ fn health(_h: codec::core::HealthRequest) -> ReceiveResult {
 
 This is a remarkably small amount of code to write compared to the functionality that you're getting. The new way of interacting with capabilities involves accessing the capability and a binding (or `default` if you don't need a named one), e.g. `keyvalue::default::atomic_add(...)?;`)
 
+## Static Linking (Capability Embedding)
+
+In a previous release, we enabled the `from_instance` function on the `NativeCapabilityProvider` struct. There was, however,a limitation with that functionality--you could only do this _once_ per waSCC host. The reason for this is that when a library is compiled to be a _dynamically loaded plugin_, it exposes a global, static function for FFI. This meant you could never statically link more than one of these plugins, because there would be a name conflict with their FFI functions used by the plugin system.
+
+Starting with waSCC 0.6.0, all of the first-party capability providers can optionally be compiled in "static plugin" mode by enabling the `static_plugin` feature in your `Cargo.toml` file when declaring a dependency on the capability provider. This effectively removes the limit on the number of capabilities you can statically link or _embed_ in your custom waSCC host.
+
 ## Miscellaneous
 
 In this release we also caught a few minor bugs, updated and improved some of the code documentation, and got to remove some technical debt. The internal dispatch plumbing, as well as the thread handlers for actors and capabilities, were convoluted and difficult to read and modify. The named bindings feature was an excellent excuse to get back into that section of the code and clean it up.

@@ -50,7 +50,7 @@ subtitle = "waSCC Technology Demos"
  css_class = ""
 +++
 
-Check out the following demonstrations to see **waSCA** in action and see what people are building on top of the waSCA framework:
+Check out the following demonstrations to see **waSCC** in action and see what people are building on top of the waSCC framework:
 
 - [**Stack Trader**](https://github.com/wascc/stack-trader) - a real-time, online multiplayer space simulation where players mine asteroids for sellable resources, built using a back-end game engine running **waSCC** services.
 

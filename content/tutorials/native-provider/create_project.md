@@ -44,7 +44,7 @@ extern crate wascc_codec as codec;
 extern crate log;
 
 use codec::capabilities::{CapabilityProvider, Dispatcher, NullDispatcher};
-use codec::core::{OP_CONFIGURE, OP_REMOVE_ACTOR};
+use codec::core::{OP_BIND_ACTOR, OP_REMOVE_ACTOR};
 use wascc_codec::core::CapabilityConfiguration;
 
 use std::error::Error;
@@ -108,7 +108,7 @@ impl CapabilityProvider for KeyvalueProvider {
         trace!("Received host call from {}, operation - {}", actor, op);
 
         match op {
-            OP_CONFIGURE if actor == "system" => self.configure(msg.to_vec().as_ref()),
+            OP_BIND_ACTOR if actor == "system" => self.configure(msg.to_vec().as_ref()),
             OP_REMOVE_ACTOR => Ok(vec![]), // Notifies provider when actor is removed from host
             _ => Err("bad dispatch".into()),
         }
@@ -123,7 +123,7 @@ Every native capability provider must implement the capability provider interfac
 * `capability_id` - This function returns the capability ID of the capability provider. This is _not_ a globally unique identifier, but an identifier of the _capability abstraction_ for which this library is a provider. For example, we'll be using `wascc:keyvalue` in the rest of this tutorial to provide an in-memory key-value store and we'll see that the Redis key-value store also uses that same capability ID. **NOTE** that only 1 capability provider per capability ID can be loaded into the same host runtime.
 * `name` - This function returns a human-readable (log-friendly) name of the capability provider that should also include the name of the specific implementation. For example, a Redis key-value provider might return the string `"Key-Value Provider (Redis)"`
 * `configure_dispatch` - Each capability provider will handle this function call _once_ during its lifetime. A dispatcher is supplied to each provider to give it a means with which it can communicate with the host runtime (and, by extension, that runtime's hosted actors)
-* `handle_call` - If an actor sends a message to a capability provider to make use of that capability, that message will arrive via this function. Capability providers _must_ handle the `OP_CONFIGURE` and the `OP_REMOVE_ACTOR` operations, even if they are ignored/return an empty vector.
+* `handle_call` - If an actor sends a message to a capability provider to make use of that capability, that message will arrive via this function. Capability providers _must_ handle the `OP_BIND_ACTOR` and the `OP_REMOVE_ACTOR` operations, even if they are ignored/return an empty vector.
 
 ## Compiling
 

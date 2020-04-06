@@ -32,7 +32,7 @@ To build our demo, we'll need to add a few dependencies to our `Cargo.toml` file
 ```
 [dependencies]
 env_logger = "0.7.1"
-wascc-host = "0.1.5" # Check to make sure you're using the latest version
+wascc-host = "0.6.0" # Check to make sure you're using the latest version
 ```
 
 The first (`env_logger`) is not a requirement of waSCC, but we use it to print log info to output.

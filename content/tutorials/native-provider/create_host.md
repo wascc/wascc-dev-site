@@ -45,25 +45,26 @@ The next step is to write our `main()` function. In this function we will initia
 
 ```rust
 use std::collections::HashMap;
-use wascc_host::{host, Actor, NativeCapability};
+use wascc_host::{WasccHost, Actor, NativeCapability};
 
 fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
-    host::add_actor(
+    let host = WasccHost::new();
+    host.add_actor(
         Actor::from_file("../../wascc/wascc-host/examples/.assets/kvcounter.wasm")?)?;
 
-    host::add_native_capability(NativeCapability::from_file(
+    host.add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
         None,
     )?)?;
 
     // Add the in-memory key-value provider
-    host::add_native_capability(NativeCapability::from_file(
+    host.add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libkeyvalue.so",
         None,
     )?)?;
 
-    host::bind_actor(
+    host.bind_actor(
         "MASCXFM4R6X63UD5MSCDZYCJNPBVSIU6RKMXUPXRKAOSBQ6UY3VT3NPZ",
         "wascc:http_server",
         None,
@@ -86,7 +87,7 @@ fn generate_port_config(port: u16) -> HashMap<String, String> {
 The first important line of code is:
 
 ```rust
-host::add_actor(
+host.add_actor(
     Actor::from_file("../../wascc/wascc-host/examples/.assets/kvcounter.wasm")?)?;
 ```
 
@@ -96,13 +97,13 @@ Next, we add a native capability provider plugin that will provide an implementa
 
 ```rust
 // Linux version:
-host::add_native_capability(NativeCapability::from_file(
+host.add_native_capability(NativeCapability::from_file(
     "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
     None,
 )?)?;
 
 // macOS version (you need to build the dylib yourself):
-host::add_native_capability(NativeCapability::from_file(
+host.add_native_capability(NativeCapability::from_file(
     "path/to/libwascc_httpsrv.dylib",
     None,
 )?)?;

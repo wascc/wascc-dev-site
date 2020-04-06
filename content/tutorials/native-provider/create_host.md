@@ -54,16 +54,19 @@ fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
 
     host::add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
+        None,
     )?)?;
 
     // Add the in-memory key-value provider
     host::add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libkeyvalue.so",
+        None,
     )?)?;
 
-    host::configure(
+    host::bind_actor(
         "MASCXFM4R6X63UD5MSCDZYCJNPBVSIU6RKMXUPXRKAOSBQ6UY3VT3NPZ",
         "wascc:http_server",
+        None,
         generate_port_config(8081),
     )?;
 
@@ -95,15 +98,17 @@ Next, we add a native capability provider plugin that will provide an implementa
 // Linux version:
 host::add_native_capability(NativeCapability::from_file(
     "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so",
+    None,
 )?)?;
 
 // macOS version (you need to build the dylib yourself):
 host::add_native_capability(NativeCapability::from_file(
     "path/to/libwascc_httpsrv.dylib",
+    None,
 )?)?;
 ```
 
-Right now we can get away without calling `configure` on the `wascc:keyvalue` capability because we're using the in-memory provider. Go ahead and run
+Right now we can get away without calling `bind_actor` on the `wascc:keyvalue` capability because we're using the in-memory provider. Go ahead and run
 the binary (from the project root):
 
 ```shell

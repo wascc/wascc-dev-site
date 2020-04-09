@@ -35,10 +35,10 @@
   url = "talk/"
   weight = 60
 
-#[[main]]
-#  name = "Contact"
-#  url = "#contact"
-#  weight = 60
+[[main]]
+  name = "Contact"
+  url = "#contact"
+  weight = 70
 
 
 [[main_right]]

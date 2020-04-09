@@ -103,7 +103,7 @@ host.add_native_capability(NativeCapability::from_file(
 )?)?;
 
 // macOS version (you need to build the dylib yourself):
-host.   add_native_capability(NativeCapability::from_file(
+host.add_native_capability(NativeCapability::from_file(
     "path/to/libwascc_httpsrv.dylib",
     None,
 )?)?;

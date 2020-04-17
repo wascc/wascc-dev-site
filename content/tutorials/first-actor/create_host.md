@@ -46,7 +46,7 @@ use std::collections::HashMap;
 use wascc_host::{WasccHost, Actor, NativeCapability};
 
 fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
-    env_logger::init();
+    let _ = env_logger::try_init();
     let host = WasccHost::new();
     host.add_actor(Actor::from_file("../hellohttp/hello_signed.wasm")?)?;
     host.add_native_capability(NativeCapability::from_file(

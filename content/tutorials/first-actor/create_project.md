@@ -48,12 +48,12 @@ use actor::prelude::*;
 actor_handlers! { codec::http::OP_HANDLE_REQUEST => hello_world,
                   codec::core::OP_HEALTH_REQUEST => health }
 
-fn hello_world(_payload: codec::core::http::Request) -> ReceiveResult {
-    Ok(serialize(codec::http::Response::ok())?)
+fn hello_world(_req: codec::core::http::Request) -> HandlerResult<codec::http::Response> {
+    Ok(codec::http::Response::ok())
 }
 
-fn health(_req: core::HealthRequest) -> ReceiveResult {
-    Ok(vec![])
+fn health(_req: codec::core::HealthRequest) -> HandlerResult<()> {
+    Ok(())
 }
 ```
 
@@ -83,9 +83,9 @@ extern crate serde_json;
 Now let's replace the `hello_world` function with the following code:
 
 ```rust
-fn hello_world(_payload: codec::http::Request) -> CallResult {
+fn hello_world(_req: codec::http::Request) -> HandlerResult<codec::http::Response> {
     let result = json!({ "hello": "world", "data": 21});
-    Ok(serialize(codec::http::Response::json(result, 200, "OK"))?)
+    Ok(codec::http::Response::json(result, 200, "OK"))
 }
 ```
 

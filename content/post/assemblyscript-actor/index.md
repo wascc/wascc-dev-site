@@ -84,7 +84,7 @@ export function abort(
   }
 ```
 
-AssemblyScript doesn't have any of the "compiler magic" or custom macros that you get with Rust, so some of the internal WebAssembly stuff is laid before for you. Here, we need to give the actor's WebAssembly module an entry point (`__guest_call`), a `_start` function that sets up our message handlers, and an `abort` function that will deal with wasm aborts or "Traps". All of this plumbing exists in the Rust SDK, but it has been hidden from you. We're hoping that as we iterate on the AssemblyScript API, we can hide some of these details as well.
+AssemblyScript doesn't have any of the "compiler magic" or custom macros that you get with Rust, so some of the internal WebAssembly stuff is laid bare before for you. Here, we need to give the actor's WebAssembly module an entry point (`__guest_call`), a `_start` function that sets up our message handlers, and an `abort` function that will deal with wasm aborts or "Traps". All of this plumbing exists in the Rust SDK, but it has been hidden from you. We're hoping that as we iterate on the AssemblyScript API, we can hide some of these details as well.
 
 Now that we've got the basic scaffold up, let's define a message handler. For this post, we'll be re-creating the [Key-Value Counter](https://github.com/wascc/examples/tree/master/kvcounter) sample from the Rust SDK.
 

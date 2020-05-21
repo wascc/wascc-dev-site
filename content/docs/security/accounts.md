@@ -5,11 +5,11 @@ date = 2017-12-03
 
 toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
-weight = 3
+weight = 4
 
 [menu.docs]
   parent = "security"
-  weight = 3
+  weight = 4
 +++
 
 An **account** is a _certifying authority_ for a module. Put another way, accounts are the _issuers_ of module tokens. There is no enforced limit on the number of module tokens an account can issue. How many accounts you choose to use will depend on the type of security infrastructure you have and the kind of verification you do in your waSCC runtime hosts.

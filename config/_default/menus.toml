@@ -86,4 +86,9 @@
   weight = 50
   identifier = "security"
 
+[[docs]]
+  name = "Gantry"
+  weight = 60
+  identifier = "gantry"
+
 

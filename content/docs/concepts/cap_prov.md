@@ -41,3 +41,7 @@ Today, the number of realistic use cases for a portable capability is low due to
 waSCC supports both portable and native capabilities loaded into the same host runtime simultaneously. It will continue to support native capabilities until WASI has advanced far enough to allow the majority of capability providers to be written as high-privilege actors.
 
 If you're interested in seeing how to create capability providers (both portable and native), then check out the [tutorials](/tutorials) section.
+
+## Provider List
+
+[Click here](/provider) for a full list of capability providers.

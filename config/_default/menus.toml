@@ -26,6 +26,11 @@
   weight = 30
 
 [[main]]
+  name = "Providers"
+  url = "#providers"
+  weight = 40
+
+[[main]]
   name = "Tutorials"
   url = "tutorials/"
   weight = 50

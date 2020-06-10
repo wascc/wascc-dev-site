@@ -5,7 +5,7 @@ date = 2017-12-03
 
 toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
-weight = 4
+weight = 70
 
 [menu.docs]
   parent = "security"

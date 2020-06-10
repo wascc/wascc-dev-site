@@ -96,4 +96,9 @@
   weight = 60
   identifier = "gantry"
 
+[[docs]]
+  name = "Lattice"
+  weight = 70
+  identifier = "lattice"
+
 

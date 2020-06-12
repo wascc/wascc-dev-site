@@ -42,9 +42,9 @@ By default, the waSCC host doesn't have this feature enabled and you'll see the 
 
 ## Introducing the Leafcar
 
-A **_leafcar_** is a portmanteau of `leaf node` and `sidecar`. Leaf node refers to running a NATS server as a leaf node, while [sidecar](https://www.oreilly.com/library/view/designing-distributed-systems/9781491983638/ch02.html) refers to running that NATS server bound to the loopback adapter (`127.0.0.1`) where it is not listening on any external IP address. The default mode of accessing the lattice message bus is through simple authentication against the NATS server running on the local loopback (there is usually one per `node` (either physical or virtual)), but you can supply configuration or environment variables that can do things like point to a fixed address for NATS, authenticate with signed tokens, etc.
+A **_leafcar_** is a portmanteau of `leaf node` and `sidecar`. Leaf node refers to running a NATS server as a leaf node, while [sidecar](https://www.oreilly.com/library/view/designing-distributed-systems/9781491983638/ch02.html) refers to running that NATS server bound to the loopback adapter (`127.0.0.1`) where it is not listening on any external IP address. The default mode of accessing the lattice message bus is through anonymous access to the NATS server running on the local loopback (there is usually one per `node` (either physical or virtual)), but you can supply configuration or environment variables that can do things like point to a fixed address for NATS, authenticate with signed tokens, etc.
 
-The immediate benefit of the **_leafcar_** is that all traffic is optimized for local delivery. Unless there is a subscriber to an invocation on the other side of the leaf node, no traffic will leave. This means that you have full control over how much or little of your traffic flows across to different portions of your infrastructure. You can choose your logical traffic segmentation regardless of the underlying physical network topology.
+The immediate benefit of the **_leafcar_** is that all traffic is optimized for local delivery. Unless there is a subscriber to an invocation on the other side of the leaf node, no traffic will leave that node. This means that you have full control over how much or little of your traffic flows across to different portions of your infrastructure. You can choose your logical traffic segmentation regardless of the underlying physical network topology.
 
 ## Forming a Lattice
 
@@ -60,9 +60,19 @@ You can use all existing waSCC samples in lattice mode, because the existence of
 ❯ ./nats-server -a 127.0.0.1
 ```
 
-If you don't have (or want to build) the binary, you can run it from a docker image.
+If you don't have (or want to build) the binary, you can run NATS from a docker image like this:
 
-Next, we're going to start 3 waSCC hosts, and none of these hosts will be able to satisfy a request on their own. Let's take a look at the manifest files for these hosts:
+```
+❯ docker run -p 4222:4222 -p 6222:6222 -p 8222:8222 nats
+```
+
+To avoid having to fuss with ensuring that docker's loopback and the host's loopback are talking to each other, you can tell the waSCC host lattice configuration to use host `0.0.0.0` instead of the loopback (which will see docker's port bindings):
+
+```
+❯ export LATTICE_HOST=0.0.0.0
+```
+
+Next, we're going to start 3 waSCC hosts, and none of these hosts will be able to satisfy a request on their own--they will need cooperation from other hosts in the lattice. Let's take a look at the manifest files for these hosts:
 
 **Hosts 2 and 3**:
 
@@ -97,7 +107,7 @@ Next, we're going to start 3 waSCC hosts, and none of these hosts will be able t
             PORT: "8082"
 ```
 
-From the root directory of the `wascc-host` project, make sure you've build the binary with lattice enabled and run the following commands, in this order. Make sure you execute each of these from a different terminal tab or window--you want 3 processes running at the same time.
+From the root directory of the `wascc-host` project, make sure you've build the binary with lattice enabled and run the following commands, _in this order_. Make sure you execute each of these from a different terminal tab or window--you want these 3 processes running at the same time.
 
 ```
 $ ./target/debug/wascc-host --manifest examples/lattice/host3.yaml
@@ -105,8 +115,8 @@ $ ./target/debug/wascc-host --manifest examples/lattice/host2.yaml
 $ ./target/debug/wascc-host --manifest examples/lattice/host1.yaml
 ```
 
-Now you can execute the "echo server" example the same way you did without lattice mode. The HTTP servers configured will respond to your requests on posts `8081` and `8082`. When you make an HTTP request via `curl localhost:808x/foo/bar`, you'll see the request handled by either host2 or host3, and you'll see the actor be invoked in host1. Because lattice communication among copies of the same entity (e.g. the `wascc:http_server` provider) is random, you may see one host process remain idle while the other starts 2 servers, or you could see the servers split evenly among the hosts.
+Now you can execute the "echo server" example the same as you would without lattice mode. The HTTP servers configured will respond to your requests on posts `8081` and `8082`. When you make an HTTP request via `curl localhost:808x/foo/bar`, you'll see the request handled by either host2 or host3, and you'll see the actor be invoked in host1. Because lattice communication among copies of the same entity (e.g. the `wascc:http_server` provider) is random, you may see one host process remain idle while the other starts 2 servers, or you could see the servers split evenly among the hosts.
 
 ## Conclusion
 
-_That's it_. You should be able to simply "flip the switch" to enable lattice, and all of your workloads and capability providers can now be deployed in an elastically scalable distributed environment, no matter what infrastructure you're using underneath.
+_That's it_! You should be able to simply "flip the switch" to enable lattice, and all of your workloads and capability providers can now be deployed in an elastically scalable distributed environment, no matter what infrastructure you're using underneath!

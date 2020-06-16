@@ -179,6 +179,8 @@ _Go forth and tinker!_
 
 {{< figure src="/pi/fig1.jpg" library="true" title="Status Light - Above Office Secret Door Bookshelf" numbered="false" lightbox="true" >}}
 
+If you're interested in getting your own "on air" light, you can get the one pictured above [here](https://www.bswusa.com/On-Air-Lighting-BSW-Retro-ON-AIR-Light-P14110.aspx).
+
 [^1]: This is due largely to the power and simplicity of [NATS](https://nats.io)
 [^2]: I've made many attempts at making my own lamp with various LED combinations and the frailty and complexity of the hardware involved left me looking for a simpler solution.
 [^3]: The one I used for this project I bought from [Amazon](https://www.amazon.com/KEYESTUDIO-4-Channel-Shield-Expansion-Raspberry/dp/B072XGF4Z3/ref=sr_1_2_sspa?dchild=1&keywords=raspberry+pi+relay+hat&qid=1592318485&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyT05SMUY2N0s5SEs5JmVuY3J5cHRlZElkPUEwODg0MjA3VDVPQUVKQU5TNzBXJmVuY3J5cHRlZEFkSWQ9QTA2NjQ5OTQzSVlMMEFET1ZVRTBDJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==), but you can find Pi Relay HATs anywhere and usually for a low price.

@@ -5,7 +5,7 @@ date = 2020-05-21
 
 toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
-weight = 2
+weight = 90
 
 [menu.docs]
   parent = "gantry"

@@ -1,14 +1,14 @@
 +++
 title = "Architecture"
-date = 2017-12-03
+date = 2020-06-10
 
 toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
-weight = 20
+weight = 50
 
 [menu.docs]
   parent = "arch"
   weight = 20
 +++
 
-TBD
+This content is coming soon.

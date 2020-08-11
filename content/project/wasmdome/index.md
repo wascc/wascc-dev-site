@@ -39,6 +39,6 @@ For more information on the process we went through in designing the game, refac
 
 The following are two video tutorials that we created for building mechs, running offline matches, and finally competing online in a lattice-based arena.
 
-[![Assembly Mechs: Beyond Wasmdome Offline Tutorial](http://img.youtube.com/vi/xjy61n7frHo/0.jpg)](http://www.youtube.com/watch?v=xjy61n7frHo "Assembly Mechs: Beyond Wasmdome Offline Tutorial")
+[![Assembly Mechs: Beyond Wasmdome Offline Tutorial](https://img.youtube.com/vi/xjy61n7frHo/0.jpg)](http://www.youtube.com/watch?v=xjy61n7frHo "Assembly Mechs: Beyond Wasmdome Offline Tutorial")
 
-[![Assembly Mechs: Beyond Wasmdome Online Tutorial](http://img.youtube.com/vi/PBQ1tyeXrCA/0.jpg)](http://www.youtube.com/watch?v=PBQ1tyeXrCA "Assembly Mechs: Beyond Wasmdome Online Tutorial")
+[![Assembly Mechs: Beyond Wasmdome Online Tutorial](https://img.youtube.com/vi/PBQ1tyeXrCA/0.jpg)](http://www.youtube.com/watch?v=PBQ1tyeXrCA "Assembly Mechs: Beyond Wasmdome Online Tutorial")

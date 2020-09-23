@@ -12,7 +12,7 @@ weight = 45
   weight = 20
 +++
 
-An _actor binding_ is a di-directional association between an actor and a capability provider. In most cases, an actor will only ever have a single relationship with a given capability provider, however, there can be many.
+An _actor binding_ is a bi-directional association between an actor and a capability provider. In most cases, an actor will only ever have a single relationship with a given capability provider, however, there can be many.
 
 For example, assume that your actor communicates solely using the `wascc:messaging` capability. It might want a separate connection for a _control plane_ and a connection for the main _application logic_. In this case, there would be two actor bindings:
 

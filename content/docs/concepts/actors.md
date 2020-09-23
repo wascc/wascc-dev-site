@@ -16,7 +16,7 @@ This document provides an overview of _actors_ as they apply to **wasCC** and We
 
 # The Actor Model
 
-The [actor model](https://en.wikipedia.org/wiki/Actor_model) has been around since **1979** and is not a new concept, though lately it seems to be enjoying something of a rennaissance. An _actor_ is the fundamental primitive of concurrent computation.
+The [actor model](https://en.wikipedia.org/wiki/Actor_model) has been around since **1979** and is not a new concept, though lately it seems to be enjoying something of a renaissance. An _actor_ is the fundamental primitive of concurrent computation.
 
 Actors are _reactive_. In response to receiving a message, a traditional actor can:
 

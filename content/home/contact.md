@@ -23,7 +23,7 @@ We are holding a recurring **[waSCC Community Meeting](https://zoom.us/j/6921841
 is open to all who are interested in using, or contributing to, waSCC and waPC.
 
 The community meeting is held every **Friday** at **1pm Eastern** and lasts **30** minutes, facilitated by
-[Brian Ketelsen](https://twitter.com/kbetelsen) of Microsoft.
+[Brian Ketelsen](https://twitter.com/bketelsen) of Microsoft.
 
 Details on the Zoom meeting follow:
 <hr/>

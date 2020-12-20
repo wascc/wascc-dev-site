@@ -30,7 +30,7 @@ To build our demo, we'll need to add a few dependencies to our `Cargo.toml` file
 ```
 [dependencies]
 env_logger = "0.7.1"
-wascc-host = "(wascc version number)"
+wascc-host = "0.14.0"
 ```
 
 The first (`env_logger`) is not a requirement of waSCC, but we use it to print log info to output.
@@ -43,17 +43,17 @@ The next step is to write our `main()` function. In this function we will initia
 
 ```rust
 use std::collections::HashMap;
-use wascc_host::{WasccHost, Actor, NativeCapability};
+use wascc_host::{Host, Actor, NativeCapability};
 
 fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     let _ = env_logger::try_init();
-    let host = WasccHost::new();
+    let host = Host::new();
     host.add_actor(Actor::from_file("../hellohttp/hello_signed.wasm")?)?;
     host.add_native_capability(NativeCapability::from_file(
         "../../wascc/wascc-host/examples/.assets/libwascc_httpsrv.so", None,
     )?)?;
 
-    host.bind_actor(
+    host.set_binding(
         "MCYQSR5WIOABHZP6Z3SG67REVC2QDCYAHUVXHUSSLFWNO55OZ3O33MKR",
         "wascc:http_server",
         None,
@@ -106,10 +106,10 @@ Seed: Sxxxxxxxxxx
 Remember that the seed is private, treat it as a secret.
 ```
 
-The _Public Key_ value is used to identify and validate the actor module. So copy the Public Key into the call to `host.bind_actor`:
+The _Public Key_ value is used to identify and validate the actor module. So copy the Public Key into the call to `host.set_binding`:
 
 ```rust
-host.bind_actor(
+host.set_binding(
     "Mxxxxxxxxxxxxxxx",  // <-- Your actor's "module" public key goes here
     "wascc:http_server",
     None, // Name of the binding, leave none for the default
@@ -117,7 +117,7 @@ host.bind_actor(
 )?;
 ```
 
-Once we've called `bind_actor`, the HTTP server capability has spun up a new thread and has created a new server dedicated specifically to our actor module on the port number specified.
+Once we've called `set_binding`, the HTTP server capability has spun up a new thread and has created a new server dedicated specifically to our actor module on the port number specified.
 
 As you go through this tutorial on your own, make sure that the paths/filenames are appropriate for your environment. The location of your `libwascc_httpsrv.so` file (found by compiling the [waSCC HTTP Server Provider](https://github.com/wascc/http-server-provider)) may differ from the text of this tutorial.
 
